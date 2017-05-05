@@ -119,7 +119,11 @@ if __name__ == '__main__':
             g = np.nan_to_num(g)
         return -np.array(g)
 
-    with tf.Session() as session:
+    config=tf.ConfigProto(
+        intra_op_parallelism_threads=1,
+        inter_op_parallelism_threads=1)
+
+    with tf.Session(config=config) as session:
         session.run(tf.global_variables_initializer())
         print(lnL.eval())
         x0 = [0.5, 2.0, 0.5, 0.5, 2.0] + edge_lengths
