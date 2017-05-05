@@ -68,12 +68,12 @@ if __name__ == '__main__':
             node.pl = [None]  * 4
             for child in node.child_node_iter():
                 el = max(child.edge_length, 1e-9)
-                #edge_lengths.append(el)
-                #el = tf.Variable(el, dtype=tf.float64)
+                edge_lengths.append(el)
+                el = tf.Variable(el, dtype=tf.float64)
                 
-                #edges.append(el)
+                edges.append(el)
                 # if we don't want to optimize branches
-                el = tf.constant(el, dtype=tf.float64)
+                #el = tf.constant(el, dtype=tf.float64)
                 if child.label == '#1':
                     p = [q.P(el, fg_scale) for q in (q0, q1, q2, q2)]
                 else:
