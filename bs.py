@@ -126,7 +126,10 @@ if __name__ == '__main__':
     with tf.Session(config=config) as session:
         session.run(tf.global_variables_initializer())
         print(lnL.eval())
-        x0 = [0.5, 2.0, 0.5, 0.5, 2.0] + edge_lengths
-        res = scipy.optimize.minimize(f, x0, jac=df, method='L-BFGS-B',
-                                      bounds=bounds, options={'disp': True})
+        #v0: 0.8066022  v1: 0.7085636  [0.5715290, 0.2350733, 0.1370346, 0.0563632]  w0: 0.2641202  k: 0.4000000  w2: 1.2603483
+        x0 = [0.2641202, 1.2603483, 0.5715290+0.2350733,
+              0.5715290/(0.5715290+0.2350733), 0.4] + edge_lengths
+        res = scipy.optimize.minimize(f, x0, jac=df, method='SLSQP',
+                                      bounds=bounds, options={'disp': True,
+                                                              'maxiter': 500})
         print(res.x)
