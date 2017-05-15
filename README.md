@@ -9,4 +9,9 @@ Although,
 
 on large trees this is much faster than fastcodeml, probably due to automatic differentiation.
 
+The downsides are:
+- There's an overhead in creating a computational graph. It is a problem especially for small datasets.
+- I'm not sure if computed values are efficiently reused.
+- Some of gradient elements are `nan`, I didn't debug this yet.
+
 Two models are implemented: M0 and Branch-Site.
